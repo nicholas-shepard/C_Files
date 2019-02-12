@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main (void)
+{
+	printf("Welcome to Yahtzee!!\n");
+	printf("You have 3 rolls to try and get 5 of a kind\n\n");
+	printf("Here we go - roll 1!\n")
+	return 0;
+}
