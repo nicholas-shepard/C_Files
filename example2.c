@@ -1,30 +1,29 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main()
-{
-  int* pc;
-  int c;
-  c = 22;
+typedef struct myItem_struct {
+   int num1;
+   int num2;
+} myItem;
 
-  printf("Address of c: %p\n", (void*)&c);
-  printf("Value of c: %d\n\n", c);
+void myItem_PrintNums(myItem* itemPtr) {
+   if (itemPtr == NULL) return;
+   
+   printf("num1: %d\n", itemPtr->num1);
+   printf("num2: %d\n", itemPtr->num2);
+   
+   return;
+}
 
-  pc = &c;
-
-  printf("Address pc points: %p\n",(void*)pc);
-  printf("Content pc points: %d\n\n", *pc);
-
-  c = 11;
-
-  printf("Address pc points: %p\n",(void*)pc);
-  printf("Content pc points: %d\n\n", *pc);
-
-  *pc = 2;
-
-  printf("Address of c:%p\n",(void*)&c);
-  printf("Value of c:%d\n\n",c);
-
-
-  return 0;
-
+int main(void) {
+   myItem* myItemPtr1 = NULL;
+   
+   myItemPtr1 = (myItem*)malloc(sizeof(myItem));
+   
+   myItemPtr1->num1 = 5;
+   (*myItemPtr1).num2 = 10;
+   
+   myItem_PrintNums(myItemPtr1);
+   
+   return 0;
 }

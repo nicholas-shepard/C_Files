@@ -1,31 +1,27 @@
+#include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-void cyclicSwap(int *a, int *b, int *c);
+int main(void){
 
-int main()
-{
-  int a,b,c;
-  printf("Enter a, b and c respectively: ");
-  scanf("%d %d %d", &a, &b, &c);
+char string1[10] = "abcxyz"; 
+char string2[10] = "xyz";
+char newText[10] = ""; 
+char* subStr = NULL; 
 
-  printf("Value before swapping:\n");
-  printf("a = %d \nb = %d \nc = %d\n", a, b, c);
+if (strcmp(string1, string2) == 0) {      // abcxyz does not equal xyz
+    printf("String1 is equal to String2\n");
+}
+if (strcmp(&string1[3], "xyz") == 0) {   // xyz equals xyz
+    printf("Second half of string 1 is equal to String2\n");
+}
+subStr = &string1[3];                     // Points to 'x' in string1
+if (strcmp(subStr, string2) == 0) {       // xyz equals xyz
+    printf("subStr points to second half of string1\n");
+}
+strcpy(newText, subStr);                  // newText is now "xyz"
+printf("nexText: %s\n",newText);
 
-  cyclicSwap(&a, &b, &c);
-
-  printf("Value after swapping:\n");
-  printf("a = %d \nb = %d \nc = %d\n", a, b, c);
-
-  return 0;
+return 0;
 }
 
-void cyclicSwap(int *a, int *b, int *c)
-{
-  int temp;
-
-  // swapping in cyclic order
-  temp = *b;
-  *b = *a;
-  *a = *c;
-  *c = temp;
-}
