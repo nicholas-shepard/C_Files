@@ -29,7 +29,7 @@ int firstDayYear(int year) {
 int firstDayMonth(int firstDayYear, int month, int year) {
 
 	int totalDays = firstDayYear;
-	int febDays;
+	/*int febDays;
 
 	if (isLeapYear(year)) {
 		febDays = 29;
@@ -64,11 +64,11 @@ int firstDayMonth(int firstDayYear, int month, int year) {
 			break;
 		case 12: totalDays = totalDays + febDays + 306;
 			break;
-	}
-
-	/*for (int i = month; i > 0; i--) {
-		totalDays += numDays(i, year);
 	}*/
+
+	for (int i = month; i > 1; i--) {
+		totalDays += numDays((i-1), year);
+	}
 
 	//totalDays += 1;
 
