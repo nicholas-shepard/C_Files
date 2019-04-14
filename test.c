@@ -1,14 +1,13 @@
-#import <stdio.h>
+#include <stdio.h>
 
-int main(void)
+int main(int argc, char * argv[])
 {
-	char userName1[50];
-	char userName2[50];
-	
-	printf("Enter your name:\n");
-	scanf("%[^\n", userName1);
-	printf("Enter another:\n");
-	scanf("%[^\n", userName2);
-	printf("%s %s\n", userName1, userName2);
-	
+
+	char name[50];
+	FILE* inFile = NULL;
+	inFile = fopen(argv[1], "r");
+	while (!feof(inFile)) {
+		fscanf(inFile, "%s", name);
+		printf("%s\n", name);
+	}
 }
