@@ -29,3 +29,5 @@ class Runner {
 };
 
 string formatTime(double time);
+
+int getPace(int dist, double time);

@@ -21,7 +21,14 @@ int main() {
 
 	runner.printrunner();
 
-	//cout << formatTime(54.0) << endl;
+	cout << endl;
+
+	cout << formatTime(getPace(400, runner.get400())) << " per mile" << endl;
+	cout << formatTime(getPace(800, runner.get800())) << " per mile" << endl;
+	cout << formatTime(getPace(1600, runner.get1600())) << " per mile" << endl;
+	cout << formatTime(runner.getmile()) << " per mile" << endl;
+	cout << formatTime(getPace(3200, runner.get3200())) << " per mile" << endl;
+	cout << formatTime(getPace(5000, runner.get5000())) << " per mile" << endl;
 
 
 

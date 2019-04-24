@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstdbool>
+#include <typeinfo>
 //#include "Card.h"
 //#include "Deck.h"
 #include "Blackjack.h"
@@ -18,6 +19,19 @@ int main() {
 
 	cout << "Welcome to Blackjack! How much would you like to buy in ($)?" << endl;
 	cin >> playerBalance;
+	
+	while(!cin) {
+		cout << "That was no integer! Please enter an integer: ";
+		cin.clear();
+		cin.ignore();
+		cin.clear();
+		cin.ignore();
+		cin.clear();
+		cin.ignore();
+		cin >> playerBalance;
+	}
+
+	
 
 	vector<Card> player;
 	vector<Card> dealer;
@@ -37,6 +51,17 @@ int main() {
 		//Getting player's bet
 		cout << endl << "BET? " << endl;
 		cin >> bet;
+	
+		while(!cin) {
+			cout << "That was no integer! Please enter an integer: ";
+			cin.clear();
+			cin.ignore();
+			cin.clear();
+			cin.ignore();
+			cin.clear();
+			cin.ignore();
+			cin >> bet;
+		}
 
 		//Resetting player and dealer hands
 		player.clear();
@@ -79,9 +104,10 @@ int main() {
 		dealer.at(0).printCard();
 
 		//Checking if player got Blackjack
-		if (((playerValue) + 10 == 21) && playerHasAce) {
+		if ((playerValue + 10 == 21) && playerHasAce && not ((dealerValue + 10 == 21) && dealerHasAce)) {
+			playerValue += 10;
 			playerBalance += (bet * 1.5);
-			cout << endl << "BLACKJACK!!!" << endl << endl << "BALANCE: " << playerBalance << endl;
+			cout << endl << "BLACKJACK!!! YOU WIN $" << (bet * 1.5) << "!" << endl << endl << "BALANCE: " << playerBalance << endl;
 			end = 'b';
 		}
 
@@ -163,26 +189,34 @@ int main() {
 		//Determining winner
 		while (end != 'b') {
 			if ((playerValue > 21) && (dealerValue > 21)) {
-				cout << endl << "BOTH BUSTED!" << endl;
+				cout << endl << "BOTH BUSTED! YOU LOSE $" << bet << "!" << endl;
+				playerBalance -= bet;
+			}
+			else if (dealerValue == 21 && dealer.size() == 2) {
+				cout << endl << "DEALER GOT BLACKJACK! YOU LOSE $" << bet << "!" << endl;
 				playerBalance -= bet;
 			}
 			else if (playerValue > 21) {
-				cout << endl << "YOU BUSTED!" << endl;
+				cout << endl << "YOU BUSTED! YOU LOSE $" << bet << "!" << endl;
 				playerBalance -= bet;
 			}
 			else if (dealerValue > 21) {
-				cout << endl << "DEALER BUSTED!" << endl;
+				cout << endl << "DEALER BUSTED! YOU WIN $" << bet << "!" << endl;
 				playerBalance += bet;
 			}
 			else {
 				if ((21 - playerValue) < (21 - dealerValue)) {
-					cout << endl << "YOU WON!" << endl;
+					cout << endl << "YOU WON! YOU GET $" << bet << "!" << endl;
 					playerBalance += bet;
 				}
 	
 				else if ((21 - playerValue) > (21 - dealerValue)) {
-					cout << endl << "YOU LOST!" << endl;
+					cout << endl << "YOU LOST! YOU LOSE $" << bet << "!" << endl;
 					playerBalance -= bet;
+				}
+
+				else if (playerValue == dealerValue) {
+					cout << endl << "PUSH!" << endl;
 				}	
 			}
 			end = 'b';

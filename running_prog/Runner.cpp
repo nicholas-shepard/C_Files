@@ -120,6 +120,15 @@ void Runner::printrunner() {
 
 string formatTime(double time) {
 	string temp;
-	temp = to_string((int(time - double(int(time * 100) % 6000) / 100)) / 60) + ":" + to_string(double(int(time * 100) % 6000 / 100));
+	temp = to_string((int(time - double((int(time * 100) % 6000)) / 100)) / 60) + ":" + to_string(double((int(time * 100) % 6000) / 100.0));
+	if (double(int(time * 100) % 6000 / 100) < 10) {
+		temp = temp.substr(0, (temp.length() - 8)) + "0" + temp.substr((temp.length() - 8), (temp.length() - 1));
+	}
 	return temp.substr(0, (temp.length() - 4));
+}
+
+int getPace(int dist, double time) {
+	double temp = 1609.344 / double(dist);
+	double pace = temp * time;
+	return pace;
 }
